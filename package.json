@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,5 +12,14 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.5.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KhoaPham-dev/heroku-map-app-user.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }

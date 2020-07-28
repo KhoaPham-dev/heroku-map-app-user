@@ -3,7 +3,7 @@
     <head>
         <title>Map</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=2,user-scalable=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <!-- MDB icon -->
         <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
@@ -30,7 +30,7 @@
             <!-- -----------position----------- -->
             <img id="img" src="/images/SoDoSPKT.jpg">
         </div>
-
+        <div id="map"></div>
 
          <!-- jQuery -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -49,6 +49,11 @@
         <script src="./script/linked-list.js"></script>
         <script src="./script/bellmanFord.js"></script>
         <script src="./script/main.js"></script>
-
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN8kBstMKiXPkX1KG8JRoVkCnlAkwxtGk&callback=initMap&libraries=&v=weekly"
+        defer
+        ></script>
+        <script src="./script/GPS.js"></script>
     </body>
 </html>

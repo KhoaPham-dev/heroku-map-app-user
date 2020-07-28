@@ -69,7 +69,7 @@ function addEdgesIntoGraph(){
     graph.addEdge(new GraphEdge(vertex1, vertex2, dataPath.path[i]["length"]));
   }
 }
-async function renderShortestPath(event){
+async function renderShortestPath(event, nameOfVertex){
   count++;
   console.log(count);
 
@@ -167,7 +167,7 @@ function showLocationByInput(event){
     ul.classList.add("list-group");
     for (let i = 0; i < dataPath.information.length && count <= 8; i++) {
       for(let j = 0; j < dataPath.information[i]["name"].length && count <= 8; j++){
-        if (stringToASCII(dataPath.information[i]["name"][j].toLowerCase()).indexOf(filter) > -1) {
+        if (filter.split(" ").find(e =>{return stringToASCII(dataPath.information[i]["name"][j].toLowerCase()).indexOf(e) > -1})) {
           count++;
           let li = document.createElement("li");
           li.classList.add(`${dataPath.information[i]["vertex"]}`);

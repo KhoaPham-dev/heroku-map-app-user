@@ -19,11 +19,15 @@ function initMap() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           let newCurrPosInImg = {
-              y: Math.floor(currPosInImg.y + (initPos.lat - 10.850844) / rate.y),
-              x: Math.floor(currPosInImg.x + (106.769787 - initPos.lng) / rate.x)
+              y: Math.floor(currPosInImg.y + (initPos.lat - 10.850882) / rate.y),
+              x: Math.floor(currPosInImg.x + (106.771668 - initPos.lng) / rate.x)
+              // y: Math.floor(currPosInImg.y + (initPos.lat - position.coords.latitude) / rate.y),
+              // x: Math.floor(currPosInImg.x + (position.coords.longitude - initPos.lng) / rate.x)
           };
-          currPosInImg = {...newCurrPosInImg};
-          showCurrentLocation();
+          if(newCurrPosInImg.x > 0 && newCurrPosInImg.y > 0){
+            currPosInImg = {...newCurrPosInImg};
+            showCurrentLocation();
+          }
         }, function() {
           handleLocationError();
         });
@@ -39,11 +43,19 @@ function showCurrentLocation(){
   let dest = document.createElement("div");
   dest.classList.add("currLocation");
   containerElement.appendChild(dest);
-  // let y = Math.floor((dataPath.vertexs[i] / 4) / dataPath.width);  //row
-  // let x = (dataPath.vertexs[i] / 4) % dataPath.width;              //col
   dest.style.left = `${currPosInImg.x - dest.offsetWidth / 2}px`;
   dest.style.top = `${currPosInImg.y - dest.offsetHeight}px`;
   dest.id = `${currPosInImg.y * dataPath.width + currPosInImg.x}`;
+
+  //add "my location"
+  let nameDestination = document.createElement("p");
+  nameDestination.innerText = "Vị trí của tôi";
+  nameDestination.classList.add("showNameDest");
+  containerElement.appendChild(nameDestination);
+  nameDestination.style.left = `${Number(dest.style.left.substring(0, dest.style.left.length - 2)) - 20}px`;
+  nameDestination.style.top = `${Number(dest.style.top.substring(0, dest.style.top.length - 2)) - 20}px`;
+  nameDestination.id = `myLocation-name`;
+
   //scroll to this location
   $("html, body").animate({
     scrollLeft: $(`#${dest.id}`).offset().left - window.screen.width / 2

@@ -55,6 +55,11 @@
     width: 22px;
     height: 33px;
 }
+.showNameDest{
+    position: absolute;
+    font-weight: bold;
+    z-index: 99;
+}
 @keyframes destChosen {
     0%   {transform: translate3d(0,0,0) scale3d(1,1,1);}
     40%  {transform: translate3d(0,10%,0) scale3d(.9,1.1,1);}
@@ -157,6 +162,9 @@ li:hover{
     display: inline;
     margin-right: -20%;
 }
+.search{
+    cursor: pointer;
+}
 @media only screen and (min-width: 501px) and (max-width: 1100px) {
     .search{
         display: none;
@@ -168,6 +176,11 @@ li:hover{
 @media only screen and (max-width: 500px) {
     .searchLocationContainer{
         width: 100%;
+
         left: 0;
+    }
+    .form-control{
+        display: inline;
+        margin-right: -25%;
     }
 }

@@ -31,6 +31,7 @@ window.onload = async function(){
   if(res.width && res.width != 0)dataPath = res;
   console.log(dataPath); // parses JSON response into native JavaScript objects
   for(let i = 0; i < dataPath.vertexs.length; i++){
+    //add vertex
     let dest = document.createElement("div");
     dest.classList.add("dest");
     containerElement.appendChild(dest);
@@ -39,6 +40,16 @@ window.onload = async function(){
     dest.style.left = `${x - dest.offsetWidth / 2}px`;
     dest.style.top = `${y - dest.offsetHeight}px`;
     dest.id = `${dataPath.vertexs[i]}`;
+    //add name vertex
+    let nameDestination = document.createElement("p");
+    nameDestination.innerText = dataPath.information[i].name[0];
+    nameDestination.classList.add("showNameDest");
+    containerElement.appendChild(nameDestination);
+    nameDestination.style.left = `${Number(dest.style.left.substring(0, dest.style.left.length - 2)) - 20}px`;
+    nameDestination.style.top = `${Number(dest.style.top.substring(0, dest.style.top.length - 2)) - 20}px`;
+    nameDestination.id = `${dataPath.vertexs[i]}-name`;
+    nameDestination.classList.add("de-active");
+
     dest.addEventListener("click", function(event){
       //scroll to this location
       $("html, body").animate({
@@ -69,12 +80,18 @@ function addEdgesIntoGraph(){
     graph.addEdge(new GraphEdge(vertex1, vertex2, dataPath.path[i]["length"]));
   }
 }
-async function renderShortestPath(event, nameOfVertex){
+async function renderShortestPath(event){
   count++;
   console.log(count);
 
   if(count == 1){
-    //delete chosen vertexs
+    //detete prev shown name of destination
+    let shownNameDest = document.querySelectorAll(".showNameDest.active");
+    for(let i = 0; i < shownNameDest.length; i++){
+      shownNameDest[i].classList.remove("active");
+      shownNameDest[i].classList.add("de-active");
+    }
+    //delete prev chosen vertexs
     let destsChosen = document.querySelectorAll(".destChosen");
     for(let i = 0; i < destsChosen.length; i++){
       destsChosen[i].classList.remove("destChosen");
@@ -90,6 +107,13 @@ async function renderShortestPath(event, nameOfVertex){
     
     event.target.classList.remove("dest");
     event.target.classList.add("destChosen");
+    //show name of destination
+    if(document.getElementById("inputLocation").value){
+      document.getElementById(`${event.target.id}-name`).innerText = document.getElementById("inputLocation").value;
+    }
+    document.getElementById(`${event.target.id}-name`).classList.remove("de-active");
+    document.getElementById(`${event.target.id}-name`).classList.add("active");
+
     start = event.target.id;
     console.log(start);
   }
@@ -98,8 +122,10 @@ async function renderShortestPath(event, nameOfVertex){
     event.target.classList.remove("dest");
     event.target.classList.add("destChosen");
     
-    console.log(dataPath.information);
     //add newers
+    document.getElementById(`${event.target.id}-name`).classList.remove("de-active");
+    document.getElementById(`${event.target.id}-name`).classList.add("active");
+
     end = event.target.id;
     console.log(end);
     //Increment quantity of user cares of the chosen locations
@@ -220,6 +246,7 @@ function chooseALocation(event){
     divContainer.removeChild(document.getElementById("listLocations"));
   } catch (error) {}
 }
+
 //Choose list of locations by using narrow key
 let li = document.querySelectorAll("li.list-group-item");
 let posLiSelected = -1;
@@ -243,7 +270,7 @@ window.addEventListener("keyup", function(e){
 
 document.getElementById("inputLocation").addEventListener("keyup", showLocationByInput);
 document.getElementById("inputLocation").addEventListener("focusin", showLocationByInput);
-document.getElementById("inputLocation").addEventListener("focusout", function(){
+document.getElementById("inputLocation").addEventListener("focusout", function(e){
   if(!isMoveOn){
     divContainer = document.getElementById("searchLocationContainer");
       try {
@@ -253,4 +280,11 @@ document.getElementById("inputLocation").addEventListener("focusout", function()
 })
 document.getElementById("btnReset").addEventListener("click", function(){
   document.getElementById("inputLocation").value = '';
+})
+document.getElementById("bthEnter").addEventListener("click", function(e){
+  if(li.length > 0){
+    count = 0;
+    if(li[posLiSelected]) chooseALocation(li[posLiSelected]);
+    else chooseALocation(li[0]);
+  }
 })

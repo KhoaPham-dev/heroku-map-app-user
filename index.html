@@ -20,12 +20,29 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <div id="searchLocationContainer" class="searchLocationContainer container">
-           
-            <input class="form-control" type="text" id="inputLocation" placeholder="Tìm địa điểm.." title="Nhập vào tên địa điểm" aria-label="Search" autocomplete="off">
-            <span id="btnReset" class="btn-reset" aria-hidden="true">&times;</span>
-            <i id="bthEnter" class="fas fa-search search" aria-hidden="true"></i>
-        </div>
+        <span id="navbtn" class="navbtn"  onclick="toggleNav()">&#9776;</span>
+        <div id="mySidenav" class="sidenav">
+            <div id="searchLocationContainer" class="searchLocationContainer container">
+                <input class="form-control" type="text" id="inputLocation" placeholder="Tìm địa điểm.." title="Nhập vào tên địa điểm" aria-label="Search" autocomplete="off">
+                <i id="bthEnter" class="fas fa-search search" aria-hidden="true"></i>
+                <span id="btnReset" class="btn-reset" aria-hidden="true">&times;</span>
+               
+            </div>
+            <p id="nameLocation" class="nameLocation">
+            </p>
+            <hr>
+            <nav>
+                <div id="findVertex" class="mode">
+                    <button class="btn-mode btnFindVertexMode"></button>
+                    <p class="text-mode">Tìm vị trí</p>
+                </div>
+                <div id="findPath" class="mode">
+                    <button class="btn-mode btnFindPathMode"></button>
+                    <p class="text-mode">Chỉ đường</p>
+                </div>
+            </nav>
+            <hr>
+        </div> 
         <div id="container" class="container-map">
             <!-- -----------position----------- -->
             <img id="img" src="/images/SoDoSPKT.jpg">
@@ -55,5 +72,11 @@
         defer
         ></script>
         <script src="./script/GPS.js"></script>
+        <script>
+            function toggleNav() {
+              document.getElementById("mySidenav").classList.toggle("open");
+              document.getElementById("navbtn").classList.toggle("close-btn")
+            }
+            </script>
     </body>
 </html>

@@ -56,10 +56,12 @@ function showCurrentLocation(){
   nameDestination.style.top = `${Number(dest.style.top.substring(0, dest.style.top.length - 2)) - 20}px`;
   nameDestination.id = `myLocation-name`;
 
+  document.getElementById("nameLocation").innerText = "Vị trí của tôi";
   //scroll to this location
   $("html, body").animate({
     scrollLeft: $(`#${dest.id}`).offset().left - window.screen.width / 2
   }, 700, 'linear', ()=>{$("html, body").animate({
     scrollTop: $(`#${dest.id}`).offset().top - window.screen.height / 2
   }, 700, 'linear');});
+  
 }

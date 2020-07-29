@@ -134,6 +134,17 @@
 .active{
     display: initial;
 }
+.list-group{
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    top: 100px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
 li:hover{
     background-color: rgb(5, 127, 175);
     cursor: pointer;
@@ -142,46 +153,158 @@ li:hover{
     background-color: rgb(5, 127, 175);
     cursor: pointer;
 }
-.searchLocationContainer{
-    z-index: 999;
-    width: 30%;
-    position: fixed;
-    left: 10px;
-    top: 5px;
+.search{
+    cursor: pointer;
+    padding: 5px;
 }
-
+.search::after {
+    content: "";
+    border-right: 1px solid #ddd;
+    margin-left: 10px;
+}
 .btn-reset{
     cursor: pointer;
     font-size: 20px;
-    padding: 10px;
+    padding: 7px;
 }
 .btn-reset:hover{
     font-size: 22px;
 }
 
-.form-control{
+#inputLocation{
     display: inline;
-    margin-right: -20%;
+    margin-right: -25%;
+    height: 50px;
+    border: none;
 }
-.search{
+
+.sidenav {
+    display: block;
+    height: 100%;
+    width: 400px;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    overflow: auto;
+    transition: 0.1s;
+  }
+
+.navbtn{
+    position: fixed;
+    top: 0;
+    left: 401px;
+    width: 45px;
+    text-align: center;
+    vertical-align: middle;
+    height: 45px;
+    z-index: 9999;
+    font-size: 30px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+    transition: 0.1s;
+}
+.navbtn:hover{
+    background-color: rgba(255, 255, 255, 0.589);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.774);
+}
+.open{
+    width: 0px;
+}
+.close-btn{
+    left: 5px;
+}
+.searchLocationContainer{
+    height: 250px;
+    padding-top: 10px;
+    background-image: url(/images/university.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.nameLocation{
+    position: relative;
+    text-align: center;
+    margin: 15px 0px;
+    width: 100%;
+    transform-origin: 50% 50%;
+    animation: nameLocation 1s linear alternate;
+}
+nav{
+    text-align: center;
+}
+.mode {
+    display: inline-block;
+    text-align: center;
+    width: 25%;
+    height: 100px;
+    padding: 10px 20px;
+    margin: 0px 40px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    transition: 0.1s;
     cursor: pointer;
 }
+.text-mode, .btn-mode{
+    display: block;
+}
+.btn-mode{
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+.btn-mode:hover{
+    border: rgb(165, 181, 83) 1px solid;
+}
+.text-mode{
+    font-size: 0.78em;
+    color: black;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.btnFindVertexMode{
+    background-image: url(/images/findVertexMode.png);
+    background-position: center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+.btnFindPathMode{
+    background-image: url(/images/findPathMode.png);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+}
+
+.btn-mode-active{
+    background-color: rgb(60, 92, 43);
+}
+.btn-mode-active:hover{
+    border: none;
+}
+@keyframes nameLocation {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 @media only screen and (min-width: 501px) and (max-width: 1100px) {
-    .search{
-        display: none;
-    }
-    .searchLocationContainer{
-        width: 50%;
-    }
+
 }
 @media only screen and (max-width: 500px) {
     .searchLocationContainer{
         width: 100%;
-
         left: 0;
     }
     .form-control{
         display: inline;
         margin-right: -25%;
     }
+    #inputLocation{
+        height: 50px;
+    }
+    .sidenav a {font-size: 18px;}
 }

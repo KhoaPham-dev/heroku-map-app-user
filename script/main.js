@@ -1,6 +1,21 @@
 const graph = new Graph();
 let isMoveOn = false;
+let isEnterInput = false;
 let imgTag = document.getElementById("img");
+let mode = {
+  findPath: false,
+  findVertex: false,
+  turnOn(modeName){
+    for (let i in this)
+      if(typeof this[i] != "function") this[i] = false;
+    this[modeName] = true;
+    //remove all btn-mode-active class element
+    document.querySelectorAll(".btn-mode").forEach(e=>{e.classList.remove("btn-mode-active")});
+    //add new class element to curr btn-mode
+    document.querySelectorAll(".btn-mode").forEach(e=>{if(e.classList[1].toLowerCase().indexOf(modeName.toLowerCase()) > -1)e.classList.add("btn-mode-active")});
+
+  }
+}
 //This dataPath will get from database
 let dataPath = {
   path: [
@@ -25,6 +40,8 @@ let containerElement = document.getElementById("container");
 let count = 0;
 let start = '';
 let end = '';
+//Turn on find vertex at first
+mode.turnOn("findVertex");
 window.onload = async function(){
   let res = await fetch('/preload');
   res = await res.json();
@@ -57,7 +74,7 @@ window.onload = async function(){
       }, 700, 'linear', ()=>{$("html, body").animate({
         scrollTop: $(`#${event.target.id}`).offset().top - window.screen.height / 2
       }, 700, 'linear');});
-      renderShortestPath(event);
+      controlMode(event);
     })
   }
   addEdgesIntoGraph();
@@ -81,9 +98,6 @@ function addEdgesIntoGraph(){
   }
 }
 async function renderShortestPath(event){
-  count++;
-  console.log(count);
-
   if(count == 1){
     //detete prev shown name of destination
     let shownNameDest = document.querySelectorAll(".showNameDest.active");
@@ -108,9 +122,15 @@ async function renderShortestPath(event){
     event.target.classList.remove("dest");
     event.target.classList.add("destChosen");
     //show name of destination
-    if(document.getElementById("inputLocation").value){
+    if(isEnterInput){
       document.getElementById(`${event.target.id}-name`).innerText = document.getElementById("inputLocation").value;
+      document.getElementById("nameLocation").innerText = document.getElementById("inputLocation").value
     }
+    else{
+      document.getElementById("nameLocation").innerText = document.getElementById(`${event.target.id}-name`).innerText;
+      document.getElementById("inputLocation").value = document.getElementById(`${event.target.id}-name`).innerText;
+    }
+    isEnterInput = false;
     document.getElementById(`${event.target.id}-name`).classList.remove("de-active");
     document.getElementById(`${event.target.id}-name`).classList.add("active");
 
@@ -118,11 +138,23 @@ async function renderShortestPath(event){
     console.log(start);
   }
   else if(count == 2){
+    
     //Remove olders
     event.target.classList.remove("dest");
     event.target.classList.add("destChosen");
     
     //add newers
+    //show name of destination
+    let the2ndVertexName = document.getElementById("inputLocation");
+    if(isEnterInput){
+      document.getElementById(`${event.target.id}-name`).innerText = the2ndVertexName.value;
+      document.getElementById("nameLocation").innerText += " - " + the2ndVertexName.value;
+    }
+    else{
+      document.getElementById("nameLocation").innerText += " - " + document.getElementById(`${event.target.id}-name`).innerText;
+      the2ndVertexName.value = document.getElementById(`${event.target.id}-name`).innerText;
+    }
+    isEnterInput = false;
     document.getElementById(`${event.target.id}-name`).classList.remove("de-active");
     document.getElementById(`${event.target.id}-name`).classList.add("active");
 
@@ -138,6 +170,14 @@ async function renderShortestPath(event){
         },
         body: JSON.stringify({vertex: start}) // body data type must match "Content-Type" header
       });
+      await fetch('/inc-qty-care', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({vertex: end}) // body data type must match "Content-Type" header
+      });
       //update dataPath on client
       let res = await fetch('/preload');
       res = await res.json();
@@ -147,7 +187,6 @@ async function renderShortestPath(event){
     }
     
     const { distances, previousVertices } = bellmanFord(graph, start);
-    count = 0;
     let pixelInArr = end;
     while(previousVertices[pixelInArr] != null){
       let prevOfPixelInArr = previousVertices[pixelInArr].value;
@@ -246,7 +285,13 @@ function chooseALocation(event){
     divContainer.removeChild(document.getElementById("listLocations"));
   } catch (error) {}
 }
-
+function controlMode(event){
+  if(mode.findVertex) count = 1;
+  else if(mode.findPath) count++;
+  console.log(count);
+  renderShortestPath(event);
+  if(count >= 2) count = 0;
+}
 //Choose list of locations by using narrow key
 let li = document.querySelectorAll("li.list-group-item");
 let posLiSelected = -1;
@@ -258,7 +303,7 @@ window.addEventListener("keyup", function(e){
     if(e.which === 40) posLiSelected++;
     else if(e.which === 38) posLiSelected--;
     else if(e.which === 13){
-      count = 0;
+      isEnterInput = true;
       if(li[posLiSelected]) chooseALocation(li[posLiSelected]);
       else chooseALocation(li[0]);
     }
@@ -283,8 +328,14 @@ document.getElementById("btnReset").addEventListener("click", function(){
 })
 document.getElementById("bthEnter").addEventListener("click", function(e){
   if(li.length > 0){
-    count = 0;
+    isEnterInput = true;
     if(li[posLiSelected]) chooseALocation(li[posLiSelected]);
     else chooseALocation(li[0]);
   }
+})
+document.getElementById("findVertex").addEventListener("click", function(e){
+  mode.turnOn("findVertex");
+})
+document.getElementById("findPath").addEventListener("click", function(e){
+  mode.turnOn("findPath");
 })

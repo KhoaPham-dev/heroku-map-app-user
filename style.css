@@ -143,12 +143,6 @@ li:hover{
     left: 10px;
     top: 5px;
 }
-@media only screen and (max-width: 500px) {
-    .searchLocationContainer{
-        width: 100%;
-        left: 0;
-    }
-}
 
 .btn-reset{
     cursor: pointer;
@@ -163,11 +157,17 @@ li:hover{
     display: inline;
     margin-right: -20%;
 }
-@media only screen and (max-width: 1100px) {
+@media only screen and (min-width: 501px) and (max-width: 1100px) {
     .search{
         display: none;
     }
     .searchLocationContainer{
         width: 50%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .searchLocationContainer{
+        width: 100%;
+        left: 0;
     }
 }

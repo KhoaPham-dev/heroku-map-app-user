@@ -212,10 +212,10 @@ li:hover{
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.774);
 }
 .open{
-    width: 0px;
+    width: 0px !important;
 }
 .close-btn{
-    left: 5px;
+    left: 5px !important;
 }
 .searchLocationContainer{
     height: 250px;
@@ -239,9 +239,6 @@ nav{
 .mode {
     display: inline-block;
     text-align: center;
-    width: 25%;
-    height: 100px;
-    padding: 10px 20px;
     margin: 0px 40px;
     text-decoration: none;
     font-size: 16px;
@@ -299,12 +296,22 @@ nav{
         width: 100%;
         left: 0;
     }
-    .form-control{
-        display: inline;
-        margin-right: -25%;
-    }
     #inputLocation{
         height: 50px;
+        display: inline;
+        margin-right: -35%;
+    }
+    .list-group{
+        top: 59px;
     }
     .sidenav a {font-size: 18px;}
+    .sidenav{
+        width: 270px;
+    }
+    .navbtn{
+        left: 271px;
+    }
+    .mode {
+        margin: 0px 31px;
+    }
 }

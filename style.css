@@ -59,6 +59,7 @@
     position: absolute;
     font-weight: bold;
     z-index: 99;
+    width: 140px;
 }
 @keyframes destChosen {
     0%   {transform: translate3d(0,0,0) scale3d(1,1,1);}

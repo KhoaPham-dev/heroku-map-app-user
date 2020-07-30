@@ -204,8 +204,13 @@ async function renderShortestPath(event){
   }
 }
 function showPath(pathMarks){
-  for(let i in pathMarks)
-    drawPointOfPath(pathMarks[i]);
+  let dem = 0;
+  for(let i in pathMarks){
+    if(dem % 10 == 0)
+      drawPointOfPath(pathMarks[i]);
+    dem++;
+  }
+
 }
 function drawPointOfPath(pixelInArray){
   let destPoint = document.createElement("div");

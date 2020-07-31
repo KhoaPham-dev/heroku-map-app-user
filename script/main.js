@@ -279,7 +279,6 @@ function chooseALocation(event){
   if(event.target){
     document.getElementById("inputLocation").value = event.target.innerText;
     document.getElementById(event.target.classList[0]).click();
-    count = 0;
   }
   else{
     document.getElementById("inputLocation").value = event.innerText;

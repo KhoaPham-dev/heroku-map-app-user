@@ -247,7 +247,7 @@ function showLocationByInput(event){
           li.addEventListener("mouseleave", function(){isMoveOn = false});
           list.push({li, qty_care: dataPath.information[i].qty_care});
 
-          li.addEventListener("click", chooseALocation);
+          li.addEventListener("click", chooseALocationInList);
         }
       }
     }
@@ -275,12 +275,14 @@ function stringToASCII(str) {
     return ''
   }
 }
-function chooseALocation(event){
+function chooseALocationInList(event){
   if(event.target){
+    isEnterInput = true;
     document.getElementById("inputLocation").value = event.target.innerText;
     document.getElementById(event.target.classList[0]).click();
   }
   else{
+    isEnterInput = true;
     document.getElementById("inputLocation").value = event.innerText;
     document.getElementById(event.classList[0]).click();
   }
@@ -308,8 +310,8 @@ window.addEventListener("keyup", function(e){
     else if(e.which === 38) posLiSelected--;
     else if(e.which === 13){
       isEnterInput = true;
-      if(li[posLiSelected]) chooseALocation(li[posLiSelected]);
-      else chooseALocation(li[0]);
+      if(li[posLiSelected]) chooseALocationInList(li[posLiSelected]);
+      else chooseALocationInList(li[0]);
     }
     li.forEach((e)=>{if(e.classList.contains("selected-li"))e.classList.remove("selected-li")});
     if(e.which === 40 || e.which === 38)
@@ -333,8 +335,8 @@ document.getElementById("btnReset").addEventListener("click", function(){
 document.getElementById("bthEnter").addEventListener("click", function(e){
   if(li.length > 0){
     isEnterInput = true;
-    if(li[posLiSelected]) chooseALocation(li[posLiSelected]);
-    else chooseALocation(li[0]);
+    if(li[posLiSelected]) chooseALocationInList(li[posLiSelected]);
+    else chooseALocationInList(li[0]);
   }
 })
 document.getElementById("findVertex").addEventListener("click", function(e){

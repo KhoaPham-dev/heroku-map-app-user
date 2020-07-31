@@ -283,6 +283,15 @@ nav{
 .btn-mode-active:hover{
     border: none;
 }
+.contribute{
+    text-align: center;
+    margin-top: 20%;
+    bottom: 5px;
+}
+.contribute > i{
+    font-size: 12px;
+    color: #818181;
+}
 @keyframes nameLocation {
     from { opacity: 0; }
     to   { opacity: 1; }

@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const path = require('path');
+const cors = require("cors");
 //Connect MongoDB
 // const mongo = require('mongodb').MongoClient;
 // const url = 'mongodb://localhost:27017';
@@ -43,6 +44,11 @@ client.connect(err => {
 //    })
 // })
 app.use(express.static(path.join(__dirname)));
+let corsOptions = {
+  origin: false,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 app.get('/preload', (req, res, next)=>{
   db.collection('dataPath').find({}).toArray((err, dataPath)=>{
     if(err) throw err;

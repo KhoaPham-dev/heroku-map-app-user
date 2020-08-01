@@ -58,10 +58,9 @@ function showCurrentLocation(){
 
   document.getElementById("nameLocation").innerText = "Vị trí của tôi";
   //scroll to this location
-  $("html, body").animate({
+  $("main").animate({
     scrollLeft: $(`#${dest.id}`).offset().left - window.screen.width / 2
-  }, 700, 'linear', ()=>{$("html, body").animate({
+  }, 700, 'linear', ()=>{$("main").animate({
     scrollTop: $(`#${dest.id}`).offset().top - window.screen.height / 2
   }, 700, 'linear');});
-  
 }

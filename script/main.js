@@ -1,4 +1,22 @@
 const graph = new Graph();
+let loader = {
+  elementLoader: document.createElement('div'),
+  layer: document.createElement('div'),
+  switchLoading(isLoading){
+    if(isLoading){
+      this.elementLoader.classList.add("loader");
+      document.getElementById("main").appendChild(this.elementLoader);
+      this.layer.classList.add('layer');
+      document.getElementById("main").appendChild(this.layer);
+    }
+    else{
+      this.elementLoader.classList.remove("loader");
+      document.getElementById("main").removeChild(this.elementLoader);
+      this.layer.classList.remove('layer');
+      document.getElementById("main").removeChild(this.layer);
+    }
+  }
+}
 let isMoveOn = false;
 let isEnterInput = false;
 let imgTag = document.getElementById("img");
@@ -40,13 +58,16 @@ let containerElement = document.getElementById("container");
 let count = 0;
 let start = '';
 let end = '';
+let resultBellmanFord = {};
 //Turn on find vertex at first
 mode.turnOn("findVertex");
 window.onload = async function(){
+  loader.switchLoading(true);
   let res = await fetch('/preload');
   res = await res.json();
   if(res.width && res.width != 0)dataPath = res;
   console.log(dataPath); // parses JSON response into native JavaScript objects
+  document.getElementById("mySidenav").style.height = `${dataPath.height}px`;
   for(let i = 0; i < dataPath.vertexs.length; i++){
     //add vertex
     let dest = document.createElement("div");
@@ -69,15 +90,19 @@ window.onload = async function(){
 
     dest.addEventListener("click", function(event){
       //scroll to this location
-      $("html, body").animate({
+      $("main").animate({
         scrollLeft: $(`#${event.target.id}`).offset().left - window.screen.width / 2
-      }, 700, 'linear', ()=>{$("html, body").animate({
+      }, 700, 'linear', ()=>{$("main").animate({
         scrollTop: $(`#${event.target.id}`).offset().top - window.screen.height / 2
       }, 700, 'linear');});
       controlMode(event);
     })
   }
   addEdgesIntoGraph();
+   //Bellmanford => init paths from all vertexs  
+  for(let i = 0; i < dataPath.vertexs.length; i++)
+    resultBellmanFord[`${dataPath.vertexs[i]}`] = bellmanFord(graph, `${dataPath.vertexs[i]}`);
+  loader.switchLoading(false);
 }
 
 function addEdgesIntoGraph(){
@@ -138,7 +163,7 @@ async function renderShortestPath(event){
     console.log(start);
   }
   else if(count == 2){
-    
+    loader.switchLoading(true);
     //Remove olders
     event.target.classList.remove("dest");
     event.target.classList.add("destChosen");
@@ -160,6 +185,7 @@ async function renderShortestPath(event){
 
     end = event.target.id;
     console.log(end);
+
     //Increment quantity of user cares of the chosen locations
     try{
       await fetch('/inc-qty-care', {
@@ -186,10 +212,9 @@ async function renderShortestPath(event){
       console.log(error)
     }
     
-    const { distances, previousVertices } = bellmanFord(graph, start);
     let pixelInArr = end;
-    while(previousVertices[pixelInArr] != null){
-      let prevOfPixelInArr = previousVertices[pixelInArr].value;
+    while(resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`] != null){
+      let prevOfPixelInArr = resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`].value;
       for(let i = 0; i < dataPath.path.length; i++){
         let pathName = dataPath.path[i]["name"].split("_");
         if(pathName.includes(`${pixelInArr}`) && pathName.includes(`${prevOfPixelInArr}`)){
@@ -199,8 +224,7 @@ async function renderShortestPath(event){
       }
       pixelInArr = prevOfPixelInArr;
     }
-    console.log(distances);
-    console.log(previousVertices);
+    loader.switchLoading(false);
   }
 }
 function showPath(pathMarks){
@@ -298,6 +322,7 @@ function controlMode(event){
   renderShortestPath(event);
   if(count >= 2) count = 0;
 }
+
 //Choose list of locations by using narrow key
 let li = document.querySelectorAll("li.list-group-item");
 let posLiSelected = -1;
@@ -318,7 +343,6 @@ window.addEventListener("keyup", function(e){
       li[posLiSelected].classList.add("selected-li");
   }
 })
-
 document.getElementById("inputLocation").addEventListener("keyup", showLocationByInput);
 document.getElementById("inputLocation").addEventListener("focusin", showLocationByInput);
 document.getElementById("inputLocation").addEventListener("focusout", function(e){

@@ -3,7 +3,7 @@
     <head>
         <title>Map</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=2,user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=5,user-scalable=yes">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <!-- MDB icon -->
         <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
@@ -20,40 +20,44 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <span id="navbtn" class="navbtn"  onclick="toggleNav()">&#9776;</span>
-        <div id="mySidenav" class="sidenav">
-            <div id="searchLocationContainer" class="searchLocationContainer container">
-                <input class="form-control" type="text" id="inputLocation" placeholder="Tìm địa điểm.." title="Nhập vào tên địa điểm" aria-label="Search" autocomplete="off">
-                <i id="bthEnter" class="fas fa-search search" aria-hidden="true"></i>
-                <span id="btnReset" class="btn-reset" aria-hidden="true">&times;</span>
-               
-            </div>
-            <p id="nameLocation" class="nameLocation">
-            </p>
-            <hr>
-            <nav>
-                <div id="findVertex" class="mode">
-                    <button class="btn-mode btnFindVertexMode"></button>
-                    <p class="text-mode">Tìm vị trí</p>
+        <main id="main">
+            <span id="navbtn" class="navbtn"  onclick="toggleNav()">&#9776;</span>
+            <div id="mySidenav" class="sidenav">
+                <div id="searchLocationContainer" class="searchLocationContainer container">
+                    <input class="form-control" type="text" id="inputLocation" placeholder="Tìm địa điểm.." title="Nhập vào tên địa điểm" aria-label="Search" autocomplete="off">
+                    <i id="bthEnter" class="fas fa-search search" aria-hidden="true"></i>
+                    <span id="btnReset" class="btn-reset" aria-hidden="true">&times;</span>
+                
                 </div>
-                <div id="findPath" class="mode">
-                    <button class="btn-mode btnFindPathMode"></button>
-                    <p class="text-mode">Chỉ đường</p>
+                <p id="nameLocation" class="nameLocation">
+                </p>
+                <hr>
+                <nav>
+                    <div id="findVertex" class="mode">
+                        <button class="btn-mode btnFindVertexMode"></button>
+                        <p class="text-mode">Tìm vị trí</p>
+                    </div>
+                    <div id="findPath" class="mode">
+                        <button class="btn-mode btnFindPathMode"></button>
+                        <p class="text-mode">Chỉ đường</p>
+                    </div>
+                </nav>
+                <hr>
+                <div class="contribute" >
+                    <a href="https://forms.gle/72EUb6FuYvM8Bjf78" target="_blank"><i>Ý kiến đóng góp tại đây</i></a><br>
+                    <i>Copyright Khoa Phạm</i>
                 </div>
-            </nav>
-            <hr>
-            <div class="contribute" >
-                <a href="https://forms.gle/72EUb6FuYvM8Bjf78" target="_blank"><i>Ý kiến đóng góp tại đây</i></a><br>
-                <i>Copyright Khoa Phạm</i>
-            </div>
-            
-        </div> 
-        <div id="container" class="container-map">
-            <!-- -----------position----------- -->
-            <img id="img" src="/images/SoDoSPKT.jpg">
-        </div>
-        <div id="map"></div>
+                
+            </div> 
 
+            <div id="map-section" class="map-section">
+                <!-- -----------position----------- -->
+                <div id="container" class="container-map">
+                    <img id="img" src="/images/SoDoSPKT.jpg">
+                </div>  
+            </div>
+            <div id="map"></div>
+        </main>
          <!-- jQuery -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
@@ -79,8 +83,9 @@
         <script src="./script/GPS.js"></script>
         <script>
             function toggleNav() {
-              document.getElementById("mySidenav").classList.toggle("open");
-              document.getElementById("navbtn").classList.toggle("close-btn")
+              document.getElementById("mySidenav").classList.toggle("collapse");
+              document.getElementById("navbtn").classList.toggle("close-btn");
+              document.getElementById("map-section").classList.toggle("map-section");
             }
             </script>
     </body>

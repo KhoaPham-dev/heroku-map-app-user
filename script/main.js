@@ -91,9 +91,9 @@ window.onload = async function(){
     dest.addEventListener("click", function(event){
       //scroll to this location
       $("main").animate({
-        scrollLeft: $(`#${event.target.id}`).offset().left - window.screen.width / 2
+        scrollLeft: $(`#${event.target.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft
       }, 700, 'linear', ()=>{$("main").animate({
-        scrollTop: $(`#${event.target.id}`).offset().top - window.screen.height / 2
+        scrollTop: $(`#${event.target.id}`)[0].offsetTop - window.screen.height / 2
       }, 700, 'linear');});
       controlMode(event);
     })

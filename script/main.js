@@ -67,7 +67,6 @@ window.onload = async function(){
   res = await res.json();
   if(res.width && res.width != 0)dataPath = res;
   console.log(dataPath); // parses JSON response into native JavaScript objects
-  document.getElementById("mySidenav").style.height = `${dataPath.height}px`;
   for(let i = 0; i < dataPath.vertexs.length; i++){
     //add vertex
     let dest = document.createElement("div");

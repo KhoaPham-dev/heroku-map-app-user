@@ -192,10 +192,10 @@ li:hover{
 }
 
 #inputLocation{
+    display: inline-block;
     margin-right: -25%;
     height: 50px;
     border: none;
-    display: inline;
 }
 
 .sidenav {
@@ -204,7 +204,6 @@ li:hover{
     width: 400px;
     position: fixed;
     z-index: 9999;
-    top: 0;
     left: 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     background: #fff;
@@ -214,7 +213,6 @@ li:hover{
 
 .navbtn{
     position: fixed;
-    top: 0;
     left: 401px;
     width: 45px;
     text-align: center;
@@ -274,6 +272,7 @@ nav{
     border-radius: 50%;
     width: 60px;
     height: 60px;
+    margin: 0 auto;
 }
 .btn-mode:hover{
     border: rgb(165, 181, 83) 1px solid;
@@ -283,6 +282,7 @@ nav{
     color: black;
     font-weight: bold;
     margin-top: 5px;
+    margin-bottom: 0;
 }
 .btnFindVertexMode{
     background-image: url(/images/findVertexMode.png);
@@ -308,7 +308,6 @@ nav{
 .contribute{
     text-align: center;
     margin-top: 20%;
-    bottom: 5px;
 }
 .contribute > i{
     font-size: 12px;
@@ -358,31 +357,69 @@ nav{
 
 }
 @media only screen and (max-width: 500px) {
+    #inputLocation{
+        margin-right: 0;
+        border: #ddd solid 1px;
+    }
     .searchLocationContainer{
         width: 100%;
         left: 0;
-        height: 200px;
+        height: auto;
+        background: none;
     }
-    #inputLocation{
-        height: 50px;
-        display: inline;
-        margin-right: -35%;
+    .search{
+        position: absolute;
+        right: 45px;
+        top: 20px;
+        cursor: pointer;
+        padding: 7px;
+    }
+    .btn-reset{
+        position: absolute;
+        right: 20px;
+        top: 12px;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 7px;
     }
     .list-group{
         top: 59px;
     }
     .sidenav a {font-size: 18px;}
-    .sidenav{
-        width: 270px;
+    .sidenav {
+        display: block;
+        height: 270px;
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
     .navbtn{
-        left: 271px;
+        left: 0;
+        bottom: 271px;
+    }
+    .close-btn{
+        bottom: 5px !important;
     }
     .mode {
         margin: 0px 31px;
     }
+    .btn-mode{
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
     .map-section{
-        padding: 0 270px;
+        padding: 0 0 270px 0;
         transition: 1s;
+    }
+    .contribute{
+        text-align: center;
+        margin-top: 5px;
+    }
+    hr{
+       margin: 0.5rem 0; 
     }
 }

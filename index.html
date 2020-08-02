@@ -82,8 +82,8 @@
         ></script>
         <script src="./script/GPS.js"></script>
         <script>
-            let offsetLeft = 400; // offsetleft is 400 for default, it could be 0, 400 or 270;
-            if(window.screen.width <= 500) offsetLeft = 270;
+            let offsetLeft = 400; // offsetleft is 400 for default, it could be 0 or 400;
+            if(window.screen.width <= 500) offsetLeft = 0;
             let isCollapse = false;
             function toggleNav() {
                 isCollapse = !isCollapse;
@@ -91,10 +91,7 @@
                 document.getElementById("navbtn").classList.toggle("close-btn");
                 document.getElementById("map-section").classList.toggle("map-section");
                 if(isCollapse)offsetLeft = 0;
-                else{
-                    if(window.screen.width <= 500) offsetLeft = 270;
-                    else offsetLeft = 400;
-                }
+                else if(!isCollapse && window.screen.width > 500) offsetLeft = 400;
             }
             </script>
     </body>

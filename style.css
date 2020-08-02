@@ -221,7 +221,7 @@ li:hover{
     z-index: 9999;
     font-size: 30px;
     cursor: pointer;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.9) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAUCAQAAAAXDMSnAAAAi0lEQVR4AX3JQcqBURQG4O/+9WNG30D3vOfSDTuQsgcZyBakZANSzMVMBme3zsBI5/VMn4ZKLP5ki1E4tYejWpilxVUtzOEUD68odYmXR5BJNp/4zllXD2phllYvamHmirsayUkfJ5ruHzueTldC08kcT5YOY9xYujqQM03XKXuaLmEtNF1e1Nz89gbL+0do6OEwRwAAAABJRU5ErkJggg==) 17px center/8px 11px no-repeat;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
     transition: 0.1s;
 }
@@ -232,8 +232,9 @@ li:hover{
 .collapse{
     width: 0px !important;
 }
-.close-btn{
+.collapse-btn{
     left: 5px !important;
+    transform: scaleX(-1);
 }
 .searchLocationContainer{
     height: 250px;
@@ -396,11 +397,13 @@ nav{
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
     .navbtn{
-        left: 0;
+        left: 5px;
         bottom: 271px;
+        transform: rotate(-90deg);
     }
-    .close-btn{
+    .collapse-btn{
         bottom: 5px !important;
+        transform: rotate(90deg);
     }
     .mode {
         margin: 0px 31px;

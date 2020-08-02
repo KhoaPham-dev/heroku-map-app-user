@@ -21,7 +21,7 @@
     </head>
     <body>
         <main id="main">
-            <span id="navbtn" class="navbtn"  onclick="toggleNav()">&#9776;</span>
+            <span id="navbtn" class="navbtn"  onclick="toggleNav()"></span>
             <div id="mySidenav" class="sidenav">
                 <div id="searchLocationContainer" class="searchLocationContainer container">
                     <input class="form-control" type="text" id="inputLocation" placeholder="Tìm địa điểm.." title="Nhập vào tên địa điểm" aria-label="Search" autocomplete="off">
@@ -88,7 +88,7 @@
             function toggleNav() {
                 isCollapse = !isCollapse;
                 document.getElementById("mySidenav").classList.toggle("collapse");
-                document.getElementById("navbtn").classList.toggle("close-btn");
+                document.getElementById("navbtn").classList.toggle("collapse-btn");
                 document.getElementById("map-section").classList.toggle("map-section");
                 if(isCollapse)offsetLeft = 0;
                 else if(!isCollapse && window.screen.width > 500) offsetLeft = 400;

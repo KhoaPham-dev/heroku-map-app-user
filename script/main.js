@@ -184,7 +184,21 @@ async function renderShortestPath(event){
 
     end = event.target.id;
     console.log(end);
-
+    
+    let pixelInArr = end;
+    while(resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`] != null){
+      let prevOfPixelInArr = resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`].value;
+      for(let i = 0; i < dataPath.path.length; i++){
+        let pathName = dataPath.path[i]["name"].split("_");
+        if(pathName.includes(`${pixelInArr}`) && pathName.includes(`${prevOfPixelInArr}`)){
+          showPath(dataPath.path[i].marked);
+          break;
+        }
+      }
+      pixelInArr = prevOfPixelInArr;
+    }
+    loader.switchLoading(false);
+    
     //Increment quantity of user cares of the chosen locations
     try{
       await fetch('/inc-qty-care', {
@@ -210,26 +224,12 @@ async function renderShortestPath(event){
     } catch (error) {
       console.log(error)
     }
-    
-    let pixelInArr = end;
-    while(resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`] != null){
-      let prevOfPixelInArr = resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`].value;
-      for(let i = 0; i < dataPath.path.length; i++){
-        let pathName = dataPath.path[i]["name"].split("_");
-        if(pathName.includes(`${pixelInArr}`) && pathName.includes(`${prevOfPixelInArr}`)){
-          showPath(dataPath.path[i].marked);
-          break;
-        }
-      }
-      pixelInArr = prevOfPixelInArr;
-    }
-    loader.switchLoading(false);
   }
 }
 function showPath(pathMarks){
   let dem = 0;
   for(let i in pathMarks){
-    if(dem % 10 == 0)
+    if(dem % 15 == 0)
       drawPointOfPath(pathMarks[i]);
     dem++;
   }

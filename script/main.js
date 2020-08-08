@@ -1,4 +1,4 @@
-const graph = new Graph();
+const graphInstance = new Graph();
 let loader = {
   elementLoader: document.createElement('div'),
   layer: document.createElement('div'),
@@ -17,9 +17,9 @@ let loader = {
     }
   }
 }
-let isMoveOn = false;
+let isMoveOver = false;
 let isEnterInput = false;
-let imgTag = document.getElementById("img");
+let imgElement = document.getElementById("img");
 let mode = {
   findPath: false,
   findVertex: false,
@@ -34,8 +34,8 @@ let mode = {
 
   }
 }
-//This dataPath will get from database
-let dataPath = {
+//This dataPathDB will get from database
+let dataPathDB = {
   path: [
       //{
       //name: 12345_472, //example: from 12345 vertex to 472 => name: 12345_472
@@ -50,12 +50,12 @@ let dataPath = {
   //vertexs:[337280, 103408, 1764892, 1834652, 1225040, 57748, 797004]      //saved vertexs
   //vertexs:[6362224, 6410292, 5618632]  //spkt
   vertexs:[],
-  width: imgTag.width,
-  height: imgTag.height,
+  width: imgElement.width,
+  height: imgElement.height,
   information: []
 };
-let containerElement = document.getElementById("container");
-let count = 0;
+let containerEle = document.getElementById("container");
+let countClick = 0;
 let start = '';
 let end = '';
 let resultBellmanFord = {};
@@ -65,26 +65,26 @@ window.onload = async function(){
   loader.switchLoading(true);
   let res = await fetch('/preload');
   res = await res.json();
-  if(res.width && res.width != 0)dataPath = res;
-  console.log(dataPath); // parses JSON response into native JavaScript objects
-  for(let i = 0; i < dataPath.vertexs.length; i++){
+  if(res.width && res.width != 0)dataPathDB = res;
+  console.log(dataPathDB); // parses JSON response into native JavaScript objects
+  for(let i = 0; i < dataPathDB.vertexs.length; i++){
     //add vertex
     let dest = document.createElement("div");
     dest.classList.add("dest");
-    containerElement.appendChild(dest);
-    let y = Math.floor((dataPath.vertexs[i] / 4) / dataPath.width);  //row
-    let x = (dataPath.vertexs[i] / 4) % dataPath.width;              //col
+    containerEle.appendChild(dest);
+    let y = Math.floor((dataPathDB.vertexs[i] / 4) / dataPathDB.width);  //row
+    let x = (dataPathDB.vertexs[i] / 4) % dataPathDB.width;              //col
     dest.style.left = `${x - dest.offsetWidth / 2}px`;
     dest.style.top = `${y - dest.offsetHeight}px`;
-    dest.id = `${dataPath.vertexs[i]}`;
+    dest.id = `${dataPathDB.vertexs[i]}`;
     //add name vertex
     let nameDestination = document.createElement("p");
-    nameDestination.innerText = dataPath.information[i].name[0];
+    nameDestination.innerText = dataPathDB.information[i].name[0];
     nameDestination.classList.add("showNameDest");
-    containerElement.appendChild(nameDestination);
+    containerEle.appendChild(nameDestination);
     nameDestination.style.left = `${Number(dest.style.left.substring(0, dest.style.left.length - 2)) - 20}px`;
     nameDestination.style.top = `${Number(dest.style.top.substring(0, dest.style.top.length - 2)) - 20}px`;
-    nameDestination.id = `${dataPath.vertexs[i]}-name`;
+    nameDestination.id = `${dataPathDB.vertexs[i]}-name`;
     nameDestination.classList.add("de-active");
 
     dest.addEventListener("click", function(event){
@@ -99,15 +99,15 @@ window.onload = async function(){
   }
   addEdgesIntoGraph();
    //Bellmanford => init paths from all vertexs  
-  for(let i = 0; i < dataPath.vertexs.length; i++)
-    resultBellmanFord[`${dataPath.vertexs[i]}`] = bellmanFord(graph, `${dataPath.vertexs[i]}`);
+  for(let i = 0; i < dataPathDB.vertexs.length; i++)
+    resultBellmanFord[`${dataPathDB.vertexs[i]}`] = bellmanFord(graphInstance, `${dataPathDB.vertexs[i]}`);
   loader.switchLoading(false);
 }
 
 function addEdgesIntoGraph(){
   let vertexInstances = [];
-  for(let i = 0; i < dataPath.path.length; i++){
-    let pathName = dataPath.path[i]["name"].split("_");
+  for(let i = 0; i < dataPathDB.path.length; i++){
+    let pathName = dataPathDB.path[i]["name"].split("_");
     let vertex1 = vertexInstances.find(vertex => vertex.getKey() === pathName[0]);
     let vertex2 = vertexInstances.find(vertex => vertex.getKey() === pathName[1]);
     if(!vertex1){
@@ -118,11 +118,11 @@ function addEdgesIntoGraph(){
       vertex2 = new GraphVertex(pathName[1]);
       vertexInstances.push(vertex2);
     }
-    graph.addEdge(new GraphEdge(vertex1, vertex2, dataPath.path[i]["length"]));
+    graphInstance.addEdge(new GraphEdge(vertex1, vertex2, dataPathDB.path[i]["length"]));
   }
 }
 async function renderShortestPath(event){
-  if(count == 1){
+  if(countClick == 1){
     //detete prev shown name of destination
     let shownNameDest = document.querySelectorAll(".showNameDest.active");
     for(let i = 0; i < shownNameDest.length; i++){
@@ -139,7 +139,7 @@ async function renderShortestPath(event){
     let pointsPath = document.getElementsByClassName("point-path");
     let len = pointsPath.length;
     for(let i = 0; i < len; i++){
-      containerElement.removeChild(pointsPath[0]);
+      containerEle.removeChild(pointsPath[0]);
       delete pointsPath[0];
     }
     
@@ -161,7 +161,7 @@ async function renderShortestPath(event){
     start = event.target.id;
     console.log(start);
   }
-  else if(count == 2){
+  else if(countClick == 2){
     loader.switchLoading(true);
     //Remove olders
     event.target.classList.remove("dest");
@@ -188,10 +188,10 @@ async function renderShortestPath(event){
     let pixelInArr = end;
     while(resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`] != null){
       let prevOfPixelInArr = resultBellmanFord[`${start}`].previousVertices[`${pixelInArr}`].value;
-      for(let i = 0; i < dataPath.path.length; i++){
-        let pathName = dataPath.path[i]["name"].split("_");
+      for(let i = 0; i < dataPathDB.path.length; i++){
+        let pathName = dataPathDB.path[i]["name"].split("_");
         if(pathName.includes(`${pixelInArr}`) && pathName.includes(`${prevOfPixelInArr}`)){
-          showPath(dataPath.path[i].marked);
+          showPath(dataPathDB.path[i].marked);
           break;
         }
       }
@@ -217,10 +217,10 @@ async function renderShortestPath(event){
         },
         body: JSON.stringify({vertex: end}) // body data type must match "Content-Type" header
       });
-      //update dataPath on client
+      //update dataPathDB on client
       let res = await fetch('/preload');
       res = await res.json();
-      if(res.width && res.width != 0)dataPath = res;
+      if(res.width && res.width != 0)dataPathDB = res;
     } catch (error) {
       console.log(error)
     }
@@ -238,15 +238,15 @@ function showPath(pathMarks){
 function drawPointOfPath(pixelInArray){
   let destPoint = document.createElement("div");
   destPoint.classList.add("point-path");
-  containerElement.appendChild(destPoint);
-  let y = Math.floor((Number(pixelInArray) / 4) / dataPath.width);  //row
-  let x = (Number(pixelInArray) / 4) % dataPath.width;              //col
+  containerEle.appendChild(destPoint);
+  let y = Math.floor((Number(pixelInArray) / 4) / dataPathDB.width);  //row
+  let x = (Number(pixelInArray) / 4) % dataPathDB.width;              //col
   destPoint.style.left = `${x - destPoint.offsetWidth / 2}px`;
   destPoint.style.top = `${y - destPoint.offsetHeight / 2}px`;
 }
 function showLocationByInput(event){
   let input, filter, divContainer, ul;
-  let count = 0;
+  let dem = 0;
   let list = [];
   input = event.target;
   filter = stringToASCII(input.value.toLowerCase());
@@ -258,17 +258,17 @@ function showLocationByInput(event){
     ul = document.createElement('ul');
     ul.id = "listLocations";
     ul.classList.add("list-group");
-    for (let i = 0; i < dataPath.information.length && count <= 8; i++) {
-      for(let j = 0; j < dataPath.information[i]["name"].length && count <= 8; j++){
-        if (filter.split(" ").find(e =>{return stringToASCII(dataPath.information[i]["name"][j].toLowerCase()).indexOf(e) > -1})) {
-          count++;
+    for (let i = 0; i < dataPathDB.information.length && dem <= 8; i++) {
+      for(let j = 0; j < dataPathDB.information[i]["name"].length && dem <= 8; j++){
+        if (filter.split(" ").find(e =>{return stringToASCII(dataPathDB.information[i]["name"][j].toLowerCase()).indexOf(e) > -1})) {
+          dem++;
           let li = document.createElement("li");
-          li.classList.add(`${dataPath.information[i]["vertex"]}`);
+          li.classList.add(`${dataPathDB.information[i]["vertex"]}`);
           li.classList.add("list-group-item");
-          li.innerText = dataPath.information[i]["name"][j];
-          li.addEventListener("mouseover", function(){isMoveOn = true});
-          li.addEventListener("mouseleave", function(){isMoveOn = false});
-          list.push({li, qty_care: dataPath.information[i].qty_care});
+          li.innerText = dataPathDB.information[i]["name"][j];
+          li.addEventListener("mouseover", function(){isMoveOver = true});
+          li.addEventListener("mouseleave", function(){isMoveOver = false});
+          list.push({li, qty_care: dataPathDB.information[i].qty_care});
 
           li.addEventListener("click", chooseALocationInList);
         }
@@ -315,11 +315,11 @@ function chooseALocationInList(event){
   } catch (error) {}
 }
 function controlMode(event){
-  if(mode.findVertex) count = 1;
-  else if(mode.findPath) count++;
-  console.log(count);
+  if(mode.findVertex) countClick = 1;
+  else if(mode.findPath) countClick++;
+  console.log(countClick);
   renderShortestPath(event);
-  if(count >= 2) count = 0;
+  if(countClick >= 2) countClick = 0;
 }
 
 //Choose list of locations by using narrow key
@@ -345,7 +345,7 @@ window.addEventListener("keyup", function(e){
 document.getElementById("inputLocation").addEventListener("keyup", showLocationByInput);
 document.getElementById("inputLocation").addEventListener("focusin", showLocationByInput);
 document.getElementById("inputLocation").addEventListener("focusout", function(e){
-  if(!isMoveOn){
+  if(!isMoveOver){
     divContainer = document.getElementById("searchLocationContainer");
       try {
         divContainer.removeChild(document.getElementById("listLocations"));

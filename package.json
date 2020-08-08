@@ -1,7 +1,7 @@
 {
   "name": "user",
   "version": "1.0.0",
-  "description": "",
+  "description": "Material Design for Bootstrap Version: MDB FREE 4.19.1",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -16,11 +16,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KhoaPham-dev/heroku-map-app-user.git"
+    "url": "git+https://github.com/KhoaPham-dev/heroku-map-app-user.git"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-css": "^0.1.0",
+    "gulp-terser-js": "^5.2.2"
+  },
+  "bugs": {
+    "url": "https://github.com/KhoaPham-dev/heroku-map-app-user/issues"
+  },
+  "homepage": "https://github.com/KhoaPham-dev/heroku-map-app-user#readme"
 }

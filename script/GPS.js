@@ -24,18 +24,17 @@ function initMap() {
               y: Math.floor(currPosInImg.y + (initPos.lat - position.coords.latitude) / rate.y),
               x: Math.floor(currPosInImg.x + (position.coords.longitude - initPos.lng) / rate.x)
           };
-          console.log(initPos.lat)
           console.log(position.coords.latitude);
-          if(newCurrPosInImg.x > 0)
-            currPosInImg.x = newCurrPosInImg.x;
-          else currPosInImg.x = 0;
-
-          if(newCurrPosInImg.y > 0)
-            currPosInImg.y = newCurrPosInImg.y;
-          else currPosInImg.y = 0;
-
-
+          console.log(position.coords.longitude);
+          if(newCurrPosInImg.x > 0 && newCurrPosInImg.x <= dataPathDB.width && newCurrPosInImg.y > 0 && newCurrPosInImg.y <= dataPathDB.height)
+          {
+            currPosInImg = {...newCurrPosInImg};
             showCurrentLocation();
+          }
+          else{
+            console.log("Nằm ngoài trường");
+          }
+
           
         }, function() {
           handleLocationError();

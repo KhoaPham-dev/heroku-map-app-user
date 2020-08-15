@@ -16,7 +16,7 @@
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="css/mdb.min.css">
         <!-- Your custom styles (optional) -->
-        <link rel="stylesheet" href="css/style.min.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <main id="main">
@@ -49,10 +49,19 @@
                 
             </div> 
 
+            <div class="zoomBtn">
+                <button id="zoomIn">+</button>
+                <button id="zoomOut">-</button>
+            </div>
+
             <div id="map-section" class="map-section">
                 <!-- -----------position----------- -->
                 <div id="container" class="container-map">
                     <img id="img" src="/images/SoDoSPKT.jpg">
+                    <script>
+                        //init zoom
+                        document.getElementById("container").style.transform = "scale(1)";
+                    </script>
                 </div>  
             </div>
             <div id="map"></div>
@@ -73,14 +82,15 @@
         <script src="./script/linked-list-node.js"></script>
         <script src="./script/linked-list.js"></script>
         <script src="./script/bellmanFord.js"></script>
-        <script src="./script/main.js"></script> -->
-
+        <script src="./script/main.js"></script> 
+        <script src="zoom.js"></script>-->
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPEheecTWH6uJVS0tUVld7BLBFXOuB5ew&callback=initMap&libraries=&v=weekly"
         defer
         ></script>
         <script src="bundle/bundle.js"></script>
+
         <script>
             let offsetLeft = 400; // offsetleft is 400 for default, it could be 0 or 400;
             if(window.screen.width <= 500) offsetLeft = 0;

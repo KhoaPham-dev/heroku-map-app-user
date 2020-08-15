@@ -67,8 +67,8 @@ function showCurrentLocation(){
   document.getElementById("nameLocation").innerText = "Vị trí của tôi";
   //scroll to this location
   $("main").animate({
-    scrollLeft: $(`#${dest.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft
+    scrollLeft: $(`#${dest.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft + $(`#${dest.id}`)[0].offsetLeft * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
   }, 700, 'linear', ()=>{$("main").animate({
-    scrollTop: $(`#${dest.id}`)[0].offsetTop - window.screen.height / 2
+    scrollTop: $(`#${dest.id}`)[0].offsetTop - window.screen.height / 2 + $(`#${dest.id}`)[0].offsetTop * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
   }, 700, 'linear');});
 }

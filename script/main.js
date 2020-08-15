@@ -90,9 +90,9 @@ window.onload = async function(){
     dest.addEventListener("click", function(event){
       //scroll to this location
       $("main").animate({
-        scrollLeft: $(`#${event.target.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft
+        scrollLeft: $(`#${event.target.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft + $(`#${event.target.id}`)[0].offsetLeft * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
       }, 700, 'linear', ()=>{$("main").animate({
-        scrollTop: $(`#${event.target.id}`)[0].offsetTop - window.screen.height / 2
+        scrollTop: $(`#${event.target.id}`)[0].offsetTop - window.screen.height / 2 + $(`#${event.target.id}`)[0].offsetTop * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
       }, 700, 'linear');});
       controlMode(event);
     })

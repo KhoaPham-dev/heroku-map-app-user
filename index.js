@@ -12,7 +12,9 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 const PORT = process.env.PORT || 4000;
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://dbMap:01886557050khoa@map.rgzu3.mongodb.net/map?retryWrites=true&w=majority";
+//const uri = "mongodb+srv://dbMap:01886557050khoa@map.rgzu3.mongodb.net/map?retryWrites=true&w=majority";
+//for database test
+const uri = "mongodb+srv://KhoaPham:01886557050khoa@cluster0.dslaa.mongodb.net/map?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true,
                                       useUnifiedTopology: true });
 client.connect(err => {

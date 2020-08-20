@@ -1,14 +1,14 @@
 let initPos = {
-    lat: 10.854175,  //y
-    lng: 106.769469 //x
+    lat: 10.853834,  //y
+    lng: 106.769088 //x
 }
 let currPosInImg = {
     x: 1,
     y: 1
 };
 let rate = {
-    x: 0.000004,
-    y: 0.000005
+    x: 0.0000026595,
+    y: 0.0000026595
 }
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -19,10 +19,10 @@ function initMap() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           let newCurrPosInImg = {
-              // y: Math.floor(currPosInImg.y + (initPos.lat - 10.850882) / rate.y),
-              // x: Math.floor(currPosInImg.x + (106.771668 - initPos.lng) / rate.x)
-              y: Math.floor(currPosInImg.y + (initPos.lat - position.coords.latitude) / rate.y),
-              x: Math.floor(currPosInImg.x + (position.coords.longitude - initPos.lng) / rate.x)
+              y: Math.floor(currPosInImg.y + (initPos.lat - 10.850970) / rate.y),
+              x: Math.floor(currPosInImg.x + (106.771283 - initPos.lng) / rate.x)
+              //y: Math.floor(currPosInImg.y + (initPos.lat - position.coords.latitude) / rate.y),
+              //x: Math.floor(currPosInImg.x + (position.coords.longitude - initPos.lng) / rate.x)
           };
           console.log(position.coords.latitude);
           console.log(position.coords.longitude);

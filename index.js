@@ -52,9 +52,10 @@ let corsOptions = {
 }
 app.use(cors(corsOptions));
 app.get('/preload', (req, res, next)=>{
-  db.collection('dataPath').find({}).toArray((err, dataPath)=>{
+  db.collection('dataPath').find({_id: 1}).toArray((err, dataPath)=>{
     if(err) throw err;
     if(!dataPath[0]) throw new Error("Empty");
+    console.log(dataPath)
     result = {
       path: dataPath[0].path,
       vertexs: dataPath[0].vertexs,
@@ -66,6 +67,7 @@ app.get('/preload', (req, res, next)=>{
     res.json(result);
   })
 })
+
 app.post('/inc-qty-care', function(req,res,next){ 
   let vertex = req.body.vertex;
   db.collection('dataPath').updateOne(
@@ -82,3 +84,13 @@ app.post('/inc-qty-care', function(req,res,next){
   }); 
   return res.redirect('/')
 }) 
+
+app.get('/preloadViewVR', (req, res, next)=>{
+  db.collection('dataPath').find({_id: 2}).toArray((err, data)=>{
+    if(err) throw err;
+    if(!data[0]) throw new Error("Empty");
+    
+    console.log(data[0].dataVR);
+    res.json(data[0].dataVR);
+  })
+})

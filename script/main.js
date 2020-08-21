@@ -59,6 +59,7 @@ let countClick = 0;
 let start = '';
 let end = '';
 let resultBellmanFord = {};
+let currChosenLocation;
 //Turn on find vertex at first
 mode.turnOn("findVertex");
 window.onload = async function(){
@@ -94,6 +95,8 @@ window.onload = async function(){
       }, 700, 'linear', ()=>{$("main").animate({
         scrollTop: $(`#${event.target.id}`)[0].offsetTop - window.screen.height / 2 + $(`#${event.target.id}`)[0].offsetTop * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
       }, 700, 'linear');});
+      currChosenLocation = dataPathDB.information.find(e=>{return e.vertex == event.target.id}).name;
+      document.getElementById("viewVRBtn").href = `/virtualtour/index.html?name="${currChosenLocation.join("|")}"`;
       controlMode(event);
     })
   }
@@ -258,8 +261,8 @@ function showLocationByInput(event){
     ul = document.createElement('ul');
     ul.id = "listLocations";
     ul.classList.add("list-group");
-    for (let i = 0; i < dataPathDB.information.length && dem <= 8; i++) {
-      for(let j = 0; j < dataPathDB.information[i]["name"].length && dem <= 8; j++){
+    for (let i = 0; i < dataPathDB.information.length && dem <= 30; i++) {
+      for(let j = 0; j < dataPathDB.information[i]["name"].length && dem <= 30; j++){
         if (filter.split(" ").find(e =>{return stringToASCII(dataPathDB.information[i]["name"][j].toLowerCase()).indexOf(e) > -1})) {
           dem++;
           let li = document.createElement("li");

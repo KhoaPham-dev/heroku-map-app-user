@@ -3,10 +3,10 @@
     <head>
         <title>Map</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=-1,maximum-scale=5,user-scalable=yes">
+        <meta name="viewport" content="width=device-width, initial-scale=-1,maximum-scale=1,user-scalable=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <!-- MDB icon -->
-        <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
         <!-- Google Fonts Roboto -->
@@ -43,7 +43,7 @@
                 </nav>
                 <hr>
                 <div class="contribute" >
-                    <a href="https://forms.gle/72EUb6FuYvM8Bjf78" target="_blank"><i>Ý kiến đóng góp tại đây</i></a><br>
+                    <a href="https://forms.gle/72EUb6FuYvM8Bjf78" target="_blank"><i>Báo lỗi & Hộp thu đóng góp</i></a><br>
                     <i>Copyright Khoa Phạm</i>
                 </div>
                 
@@ -53,14 +53,16 @@
                 <button id="zoomIn">+</button>
                 <button id="zoomOut">-</button>
             </div>
-
+            <a id="viewVRBtn"  class="viewVR" href='/virtualtour/index.html?name="Cổng chính"' target="_blank">
+                <span>Xem vị trí</span>
+            </a>
             <div id="map-section" class="map-section">
                 <!-- -----------position----------- -->
                 <div id="container" class="container-map">
                     <img id="img" src="/images/newspkt.jpg">
                     <script>
                         //init zoom
-                        document.getElementById("container").style.transform = "scale(1)";
+                        document.getElementById("container").style.transform = "scale(0.4)";
                     </script>
                 </div>  
             </div>
@@ -100,6 +102,7 @@
                 document.getElementById("mySidenav").classList.toggle("collapse");
                 document.getElementById("navbtn").classList.toggle("collapse-btn");
                 document.getElementById("map-section").classList.toggle("map-section");
+                document.getElementById("viewVRBtn").classList.toggle("collapseViewVR");
                 if(isCollapse)offsetLeft = 0;
                 else if(!isCollapse && window.screen.width > 500) offsetLeft = 400;
             }

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Map View</title>
+<meta charset="utf-8">
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="multiple-scenes view-control-buttons">
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-cng-chnh">
+        <li class="text">Cổng chính</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-ministop">
+        <li class="text">Ministop</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-nh-xe-gio-vin">
+        <li class="text">Nhà xe giáo viên</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-cng-gi-xe-a">
+        <li class="text">Cổng giữ xe A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-sn-vn-ng">
+        <li class="text">Sân vận động</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-clb-khoa-hc-tr">
+        <li class="text">CLB Khoa học trẻ</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-cng-vin-t-hc-khu-vit-c">
+        <li class="text">Công viên tự học khu Việt Đức</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-cng-ra-cng-gi-xe-khu-f">
+        <li class="text">Cổng ra, cổng giữ xe khu F</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-sn-thi-u-a">
+        <li class="text">Sân thi đấu A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-trung-tm-vit-c">
+        <li class="text">Trung tâm Việt Đức</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-xng-th-ng-c-xng">
+        <li class="text">Xưởng TH Động cơ xăng</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-xng-thc-tp-ng-sn">
+        <li class="text">Xưởng thực tập đồng sơn</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="12-li-vo-phng-quan-h-doanh-nghip">
+        <li class="text">Lối vào phòng quan hệ doanh nghiệp</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="13-trung-tm-vit-nht-vjec">
+        <li class="text">Trung tâm Việt Nhật VJEC</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="14-li-vo-th-vin-clc">
+        <li class="text">Lối vào thư viện CLC</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="15-ta-nh-trung-tm">
+        <li class="text">Tòa nhà trung tâm</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="16-synary---gs25">
+        <li class="text">Synary - GS25</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="17-xng-in-t-t">
+        <li class="text">Xưởng điện tử ôtô</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="18-trm-y-t">
+        <li class="text">Trạm y tế</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="19-xng-g">
+        <li class="text">Xưởng gỗ</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="20-xng-nhit-in-lnh">
+        <li class="text">Xưởng nhiệt điện lạnh</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="21-khoa-c-kh-ng-lc">
+        <li class="text">Khoa Cơ khí động lực</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="22-cng-vin-t-hc-khu-a">
+        <li class="text">Công viên tự học khu A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="23-tng-hm-tntt-th-vin-clc">
+        <li class="text">Tầng hầm TNTT, thư viện CLC</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="24-li-vo-pha-sau-tntt">
+        <li class="text">Lối vào phía sau TNTT</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="25-xng-thc-tp-in">
+        <li class="text">Xưởng thực tập in</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="26-trung-tm-gio-dc-th-cht--quc-phng">
+        <li class="text">Trung tâm giáo dục thể chất &amp; quốc phòng</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="27-vp-khoa-c-kh-ch-to-my">
+        <li class="text">VP. Khoa cơ khí chế tạo máy</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="28-xng-thc-hnh-c-kh-my-i">
+        <li class="text">Xưởng thực hành Cơ khí máy I</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="29-xng-thc-hnh-c-kh-my-ii">
+        <li class="text">Xưởng thực hành Cơ khí máy II</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="30-khu-cng-ngh-cao">
+        <li class="text">Khu công nghệ cao</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="31-cng-vin-t-hc-khu-e">
+        <li class="text">Công viên tự học khu E</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="32-bi-gi-xe-khu-e">
+        <li class="text">Bãi giữ xe khu E</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="33-cng-vin-khu-a">
+        <li class="text">Công viên khu A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="34-hi-trng-ln">
+        <li class="text">Hội trường lớn</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="35-phng-o-to-khng-chnh-quy">
+        <li class="text">Phòng đào tạo không chính quy</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="36-phng-quan-h-doanh-nghip">
+        <li class="text">Phòng quan hệ doanh nghiệp</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="37-khu-phng-hc-a11">
+        <li class="text">Khu phòng học A11</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="38-vn-phng-on-trng">
+        <li class="text">Văn phòng Đoàn trường</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="39-th-vin-khu-a">
+        <li class="text">Thư viện khu A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="40-phng-hc-khu-c---khoa-in---in-t">
+        <li class="text">Phòng học Khu C - Khoa Điện - điện tử</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="41-cng-vin-t-hc-khu-c">
+        <li class="text">Công viên tự học khu C</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="42-phng-hc-khu-d---vn-phng-khoa-in-">
+        <li class="text">Phòng học khu D - Văn phòng khoa Điện </li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="43-xng-thc-hnh-may">
+        <li class="text">Xưởng Thực hành may</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="44-bi-gi-xe-f">
+        <li class="text">Bãi giữ xe F</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="45-xng-diesel">
+        <li class="text">Xưởng diesel</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="46-vp-khoa-xy-dng">
+        <li class="text">VP. Khoa Xây dựng</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="47-cng-ra-khu-b---cng-gi-xe-b">
+        <li class="text">Cổng ra khu B - Cổng giữ xe B</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="48-phng-th-nghim-c-hc">
+        <li class="text">Phòng thí nghiệm cơ học</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="49-cn-tin">
+        <li class="text">Căn tin</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="50-xng-thc-tp-ngui-hn">
+        <li class="text">Xưởng thực tập nguội, hàn</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="51-cng-ra-khu-e">
+        <li class="text">Cổng ra khu E</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="52-trung-tm-tin-hc">
+        <li class="text">Trung tâm tin học</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="53-khu-phng-hc-khu-e">
+        <li class="text">Khu phòng học khu E</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="54-tim-photocopy">
+        <li class="text">Tiệm photocopy</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="55-vn-phng-sinh-vin-trng">
+        <li class="text">Văn phòng sinh viên trường</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="56-trung-tm-ngoi-ng">
+        <li class="text">Trung tâm ngoại ngữ</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="57-dy-phng-hc-khu-a">
+        <li class="text">Dãy phòng học khu A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="58-khoa-cng-ngh-ha-hc---thc-phm">
+        <li class="text">Khoa công nghệ hóa học - thực phẩm</li>
+      </a>
+    
+  </ul>
+</div>
+
+<div id="titleBar">
+  <h1 class="sceneName"></h1>
+</div>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<script src="vendor/es5-shim.js"></script>
+<script src="vendor/eventShim.js"></script>
+<script src="vendor/classList.js"></script>
+<script src="vendor/requestAnimationFrame.js" ></script>
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>

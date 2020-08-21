@@ -33,6 +33,7 @@ function initMap() {
           }
           else{
             console.log("Nằm ngoài trường");
+           
           }
 
           

@@ -40,10 +40,15 @@
                         <button class="btn-mode btnFindPathMode"></button>
                         <p class="text-mode">Chỉ đường</p>
                     </div>
+                    <div id="shareLocation" class="mode">
+                        <button class="btn-mode btnShareLocationMode"></button>
+                        <p class="text-mode">Bật chia sẻ vị trí</p>
+                    </div>
                 </nav>
+
                 <hr>
                 <div class="contribute" >
-                    <a href="https://forms.gle/72EUb6FuYvM8Bjf78" target="_blank"><i>Báo lỗi & Hộp thu đóng góp</i></a><br>
+                    <a href="https://forms.gle/72EUb6FuYvM8Bjf78" target="_blank"><i>Báo lỗi & Hộp thư góp ý</i></a><br>
                     <i>Copyright Khoa Phạm</i>
                 </div>
                 
@@ -68,6 +73,35 @@
             </div>
             <div id="map"></div>
         </main>
+
+        <!-- Modal Input information -->
+        <div class="modal fade" id="modalAddUsername" tabindex="-1"  aria-labelledby="myModalLabel"
+aria-hidden="true">
+            <div class="modal-dialog cascading-modal">
+                <!--Content-->
+                <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                    <h4 class="title"><i class="fas fa-pencil-alt"></i>Nhập tên của bạn</h4>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0">
+
+                    <div class="md-form form-sm">
+                    <input class="form-control" name="username" id="username" placeholder="Nhập tên của bạn tại đây..." required/>
+                    <label for="username" class="active">Họ và tên</label>
+                    </div>
+
+                    <div class="text-center mt-1-half">
+                    <button id="addUsername" class="btn btn-info mb-2 waves-effect waves-light">Hoàn thành<i class="fas fa-send ml-1"></i></button>
+                    </div>
+
+                </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
          <!-- jQuery -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
@@ -86,11 +120,39 @@
         <script src="./script/bellmanFord.js"></script>
         <script src="./script/main.js"></script> 
         <script src="zoom.js"></script>-->
+
+        <!-- firebase -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyDPEheecTWH6uJVS0tUVld7BLBFXOuB5ew",
+                authDomain: "map-project-284709.firebaseapp.com",
+                databaseURL: "https://map-project-284709.firebaseio.com",
+                projectId: "map-project-284709",
+                storageBucket: "map-project-284709.appspot.com",
+                messagingSenderId: "689163049338",
+                appId: "1:689163049338:web:7fa1b9a5c0c2bae8351ec3",
+                measurementId: "G-R68SS4DS9Y"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            let db = firebase.analytics();
+        </script>
+
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPEheecTWH6uJVS0tUVld7BLBFXOuB5ew&callback=initMap&libraries=&v=weekly"
         defer
         ></script>
+
         <script src="bundle/bundle.js"></script>
 
         <script>

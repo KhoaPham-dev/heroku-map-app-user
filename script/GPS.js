@@ -10,6 +10,7 @@ let rate = {
     x: 0.0000026595,
     y: 0.0000026595
 }
+let firstLoading = true;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: initPos,
@@ -17,7 +18,7 @@ function initMap() {
     });
       // Try HTML5 geolocation.
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.watchPosition(function(position) {
           let newCurrPosInImg = {
               // y: Math.floor(currPosInImg.y + (initPos.lat - 10.850970) / rate.y),
               // x: Math.floor(currPosInImg.x + (106.771283 - initPos.lng) / rate.x)
@@ -67,9 +68,13 @@ function showCurrentLocation(){
 
   document.getElementById("nameLocation").innerText = "Vị trí của tôi";
   //scroll to this location
-  $("main").animate({
-    scrollLeft: $(`#${dest.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft + $(`#${dest.id}`)[0].offsetLeft * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
-  }, 700, 'linear', ()=>{$("main").animate({
-    scrollTop: $(`#${dest.id}`)[0].offsetTop - window.screen.height / 2 + $(`#${dest.id}`)[0].offsetTop * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
-  }, 700, 'linear');});
+  if(firstLoading){
+    $("main").animate({
+      scrollLeft: $(`#${dest.id}`)[0].offsetLeft - window.screen.width / 2 + offsetLeft + $(`#${dest.id}`)[0].offsetLeft * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
+    }, 700, 'linear', ()=>{$("main").animate({
+      scrollTop: $(`#${dest.id}`)[0].offsetTop - window.screen.height / 2 + $(`#${dest.id}`)[0].offsetTop * (Number(containerEle.style.transform.substring(6, document.getElementById("container").style.transform.length - 1)) - 1)
+    }, 700, 'linear');});
+    firstLoading = false;
+  }
+  
 }
